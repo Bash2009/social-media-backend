@@ -17,4 +17,8 @@ export class UserService {
     });
     return newUser;
   }
+
+  findOneById(uid: string) {
+    return this.userRepository.findOneBy({ uid });
+  }
 }

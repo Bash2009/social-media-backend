@@ -25,6 +25,12 @@ export class Profile {
   bio: string;
 
   @Column({ nullable: true })
+  location: string;
+
+  @Column({ nullable: true })
+  website: string;
+
+  @Column({ nullable: true })
   avatarUrl: string;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })

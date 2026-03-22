@@ -25,6 +25,7 @@ export class ProfileService {
   ) {
     try {
       if (avatar) {
+        avatar.filename = ` ${Date.now()}-${createProfileDto.uid}`;
         const avatarUpload = await this.cloudinaryService
           .uploadImage(avatar)
           .catch((error) => {
@@ -67,5 +68,15 @@ export class ProfileService {
         throw new ConflictException(error.message);
       }
     }
+  }
+
+  async findUserById(uid: string) {
+    const profile = await this.profileRepository.findOne({
+      where: { user: { uid } },
+    });
+    if (!profile) {
+      throw new NotFoundException('Profile not found');
+    }
+    return profile;
   }
 }

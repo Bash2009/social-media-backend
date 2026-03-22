@@ -1,6 +1,8 @@
 import {
   Body,
   Controller,
+  Get,
+  Param,
   Post,
   UploadedFile,
   UseInterceptors,
@@ -20,5 +22,10 @@ export class ProfileController {
     @UploadedFile() avatar: Express.Multer.File,
   ) {
     return this.profileService.create(createProfileDto, avatar);
+  }
+
+  @Get(':uid')
+  findOne(@Param('uid') uid: string) {
+    return this.profileService.findUserById(uid);
   }
 }
